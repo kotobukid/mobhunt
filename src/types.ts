@@ -9,7 +9,7 @@ export type AreaMap = {
     id: number,
     name: string,
     starts: StartPoint[]
-}
+};
 
 export type Mob = {
     id: number,
@@ -17,4 +17,10 @@ export type Mob = {
     name: string,
     x: number,
     y: number
-}
+};
+
+export type Point2DWithID = {
+    x: number,
+    y: number,
+    id: number
+};
