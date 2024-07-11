@@ -17,7 +17,8 @@ export type Mob = {
     area: number,
     name: string,
     x: number,
-    y: number
+    y: number,
+    r: number
 };
 
 export type MobClient = {

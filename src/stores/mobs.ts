@@ -11,10 +11,11 @@ type Actions = {
     toggle_selected(id: number): void,
     set_area(area: number): void,
     reset_area(): void
+    update_mob(mob: MobClient): void
 };
 
 type Getters = {
-    mobs_filtered(state: State): Mob[],
+    mobs_filtered(state: State): MobClient[],
     mobs_selected(state: State): MobClient[]
 };
 
@@ -48,10 +49,21 @@ export const useMobStore = defineStore<'mobs', State, Getters, Actions>('mobs', 
         },
         reset_area() {
             this.area = -1;
+        },
+        update_mob(mob: MobClient) {
+            for (let i = 0; i < this.mobs.length; i++) {
+                if (this.mobs[i].id === mob.id && this.mobs[i].area === mob.area) {
+                    this.mobs[i] = {
+                        ...mob
+                    };
+                    break;
+                }
+            }
+            this.mobs = this.mobs.concat([]);
         }
     },
     getters: {
-        mobs_filtered(state: State): Mob[] {
+        mobs_filtered(state: State): MobClient[] {
             if (state.area === -1) {
                 return state.mobs;
             } else {

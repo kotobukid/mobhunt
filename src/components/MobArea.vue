@@ -11,7 +11,7 @@ const transform = computed(() => {
 
 <template lang="pug">
   g.mob_area(:style="transform")
-    circle(cx="0" cy="0" r="40" fill="pink" stroke="red" stroke-width="1")
+    circle(cx="0" cy="0" :r="props.mob.r" fill="pink" stroke="red" stroke-width="1")
     text(x="-2" y="8") {{ props.mob.name }}
 </template>
 
