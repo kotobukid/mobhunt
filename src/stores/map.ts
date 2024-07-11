@@ -6,9 +6,19 @@ type State = {
     active: number
 };
 
+type Actions = {
+    set_initial(maps: AreaMap[]): void,
+    set_area(active: number): void
+};
+
+type Getters = {
+    starts_filtered(state: State): StartPoint[],
+    active_map_detail(state: State): AreaMap | undefined
+};
+
 type NumericString = string;
 
-export const useMapStore = defineStore<'map', State, any, any>('map', {
+export const useMapStore = defineStore<'map', State, Getters, Actions>('map', {
     state() {
         return {
             maps: [],

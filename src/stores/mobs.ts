@@ -4,9 +4,21 @@ import type {Mob, MobClient} from "@/types";
 type State = {
     mobs: MobClient[],
     area: number
-}
+};
 
-export const useMobStore = defineStore<'mobs', State, any, any>('mobs', {
+type Actions = {
+    set_initial(mobs: Mob[]): void,
+    toggle_selected(id: number): void,
+    set_area(area: number): void,
+    reset_area(): void
+};
+
+type Getters = {
+    mobs_filtered(state: State): Mob[],
+    mobs_selected(state: State): MobClient[]
+};
+
+export const useMobStore = defineStore<'mobs', State, Getters, Actions>('mobs', {
     state() {
         return {
             mobs: [],
