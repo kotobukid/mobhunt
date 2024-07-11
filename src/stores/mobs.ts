@@ -69,7 +69,7 @@ export const useMobStore = defineStore<'mobs', State, Getters, Actions>('mobs', 
             } else {
                 return state.mobs.filter((mob: MobClient) => {
                     return (mob.area === state.area);
-                })
+                });
             }
         },
         mobs_selected(state: State): MobClient[] {

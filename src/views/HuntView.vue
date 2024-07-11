@@ -6,15 +6,17 @@ import type {Mob, MobClient, Point2DWithID} from "@/types";
 import {type Ref, ref} from "vue";
 import {useCalcRoute} from "@/composables/calcRoute";
 import {useMobStore} from "@/stores/mobs";
+import {useMapStore} from "@/stores/map";
 
 const mobStore = useMobStore();
+const mapStore = useMapStore();
 
-const {calc_route} = useCalcRoute();
+const {calc_route, calculateAllDistances} = useCalcRoute();
 
 const points: Ref<Point2DWithID[]> = ref([]);
 
 const routeUpdated = () => {
-  points.value = calc_route();
+  points.value = calc_route(map_distances_all.value);
 };
 
 const edit_target: Ref<MobClient | null> = ref(null);
@@ -30,10 +32,21 @@ const target_updated = (circle: { x: number, y: number, r: number }) => {
   });
   edit_target.value = null;
 };
+
+const map_distances_all: Ref<Map<string, number>> = ref(new Map())
+
+const pre_calc_all_distances = () => {
+  const map = mapStore.active_map_detail;
+  const mobs = mobStore.mobs_filtered;
+  const allDistances = calculateAllDistances([...map!.starts, ...mobs]);
+  console.log(allDistances);
+  map_distances_all.value = allDistances;
+}
 </script>
 
 <template lang="pug">
   MapList(@route-updated="routeUpdated")
+  button(@click="pre_calc_all_distances") 距離計算
   MobList(
     @route-updated="routeUpdated"
     @set-edit-target="set_edit_target_mob"

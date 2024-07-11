@@ -27,7 +27,13 @@ export const useMapStore = defineStore<'map', State, Getters, Actions>('map', {
     },
     actions: {
         set_initial(maps: AreaMap[]) {
-            this.maps = maps;
+            this.maps = maps.map((m) => {
+                m.starts = m.starts.map(s => {
+                    s.id = s.id + 10000;
+                    return s;
+                });
+                return m;
+            });
         },
         set_area(active: number) {
             this.active = active;
