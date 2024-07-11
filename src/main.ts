@@ -23,5 +23,13 @@ mapStore.set_initial(data.maps);
 const mobStore = useMobStore();
 mobStore.set_initial(data.mobs);
 
+if (data.maps.length > 0) {
+    mapStore.set_area(data.maps[0].id);
+    mobStore.set_area(data.maps[0].id);
+} else {
+    mapStore.set_area(0);
+    mobStore.set_area(0);
+}
+
 
 app.mount('#app')
