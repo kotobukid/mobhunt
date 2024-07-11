@@ -37,7 +37,7 @@ const paths = computed(() => {
   svg(width="512" height="512" viewBox="0 0 512 512")
     rect(x="0" y="0" width="512" height="512" stroke-width="0" stroke="black" fill="#d6c9c9")
     line.route(v-for="p in paths" :x1="p.x1" :y1="p.y1" :x2="p.x2" :y2="p.y2")
-    mob-area(v-for="mob in mobStore.mobs_filtered" :key="mob.id" :mob="mob")
+    mob-area(v-for="mob in mobStore.mobs_selected" :key="mob.id" :mob="mob")
     start-point-view(v-for="start in mapStore.starts_filtered" :key="start.id" :start="start")
 
 

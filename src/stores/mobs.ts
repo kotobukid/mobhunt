@@ -1,8 +1,8 @@
 import {defineStore} from "pinia";
-import type {Mob} from "@/types";
+import type {Mob, MobClient} from "@/types";
 
 type State = {
-    mobs: Mob[],
+    mobs: MobClient[],
     area: number
 }
 
@@ -15,7 +15,21 @@ export const useMobStore = defineStore<'mobs', State, any, any>('mobs', {
     },
     actions: {
         set_initial(mobs: Mob[]) {
-            this.mobs = mobs;
+            this.mobs = mobs.map(m => {
+                return {
+                    ...m,
+                    selected: false
+                };
+            });
+        },
+        toggle_selected(id: number) {
+            for (let i = 0; i < this.mobs.length; i++) {
+                if (this.mobs[i].id === id) {
+                    this.mobs[i].selected = !this.mobs[i].selected;
+                    break;
+                }
+            }
+            this.mobs = this.mobs.concat([]);
         },
         set_area(area: number) {
             this.area = area;
@@ -29,8 +43,17 @@ export const useMobStore = defineStore<'mobs', State, any, any>('mobs', {
             if (state.area === -1) {
                 return state.mobs;
             } else {
-                return state.mobs.filter((mob: Mob) => {
-                    return mob.area === state.area
+                return state.mobs.filter((mob: MobClient) => {
+                    return (mob.area === state.area);
+                })
+            }
+        },
+        mobs_selected(state: State): MobClient[] {
+            if (state.area === -1) {
+                return state.mobs;
+            } else {
+                return state.mobs.filter((mob: MobClient) => {
+                    return (mob.area === state.area) && mob.selected;
                 })
             }
         }

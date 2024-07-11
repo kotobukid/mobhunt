@@ -1,6 +1,14 @@
 import type {Point2DWithID} from "@/types";
+import {useMapStore} from "@/stores/map";
+import {useMobStore} from "@/stores/mobs";
 
 export const useCalcRoute = () => {
+    const mapStore = useMapStore();
+    const mobStore = useMobStore();
+
+    const calc_route = () => {
+        return getShortestRoute(mapStore.starts_filtered, mobStore.mobs_selected);
+    };
 
     function getDistance(p1: Point2DWithID, p2: Point2DWithID): number {
         // calculate Euclidean distance between two points
@@ -40,6 +48,7 @@ export const useCalcRoute = () => {
     }
 
     return {
+        calc_route,
         getShortestRoute
     };
 }

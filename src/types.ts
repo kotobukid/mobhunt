@@ -19,6 +19,10 @@ export type Mob = {
     y: number
 };
 
+export type MobClient = {
+    selected: boolean
+} & Mob;
+
 export type Point2DWithID = {
     x: number,
     y: number,
