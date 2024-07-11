@@ -13,6 +13,8 @@ import { RouterLink, RouterView } from 'vue-router'
   </header>
 
   <RouterView />
+  <hr>
+  <div>©SQUARE ENIX</div>
 </template>
 
 <style scoped>
