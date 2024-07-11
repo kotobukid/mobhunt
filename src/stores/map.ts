@@ -31,6 +31,9 @@ export const useMapStore = defineStore<'map', State, any, any>('map', {
             } else {
                 return [];
             }
+        },
+        active_map_detail(state: State): AreaMap {
+            return state.maps.find(m => m.id === state.active)!;
         }
     }
 })

@@ -8,6 +8,7 @@ export type StartPoint = {
 export type AreaMap = {
     id: number,
     name: string,
+    img: string,
     starts: StartPoint[]
 };
 
@@ -27,4 +28,9 @@ export type Point2DWithID = {
     x: number,
     y: number,
     id: number
+};
+
+export type Point2D = {
+    x: number,
+    y: number
 };
